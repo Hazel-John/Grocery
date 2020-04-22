@@ -20,6 +20,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -92,6 +93,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1259" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1587044099953" />
+    <state x="142" y="0" key="SettingsEditor" timestamp="1587554920953">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1587554920953" />
     <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1587014636638">
       <screen x="0" y="0" width="1280" height="680" />
     </state>

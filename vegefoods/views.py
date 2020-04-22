@@ -17,10 +17,19 @@ class ProductSingleView(DetailView):
 
 
 def cart(request):
-    orders = Order.objects.all().filter(user=request.user)
-    for i in orders:
-        print(i.items)
-    return render(request, 'cart.html', {'orders': orders})
+    print("Hello World")
+   # context ={
+    #    'orders': Order.objects.all().filter(user=request.user)
+    #}
+    #for i in context:
+     #   print(i..items)
+    var= Order.objects.all().filter(user=request.user)
+    print(type(var))
+    for i in var:
+        print(i.items.all())
+        for j in i.items.all():
+            print (j)
+    return render(request, 'cart.html')
 
 
 
@@ -35,12 +44,14 @@ def add_to_cart(request,slug):
     if order_qs.exists():
         order = order_qs[0]
         if order.items.filter(item__slug=item.slug).exists():
+            #ordered_date = timezone.now()
             order_item.quantity += 1
             order_item.save()
             messages.info(request, "This item quantity was updated.")
         else:
             messages.info(request, "This item was added to your cart")
             order.items.add(order_item)
+            #ordered_date = timezone.now()
 
     else:
         ordered_date = timezone.now()

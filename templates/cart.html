@@ -99,10 +99,9 @@
 	    					<table class="table">
 						    	<thead class="thead-primary">
 						      	<tr class="text-center">
-						        	<th>&nbsp;</th>
 									<th>&nbsp;</th>
 						        	<th>Product name</th>
-						        	<th>Price</th>
+						        	<th>Ordered Date</th>
 						        	<th>Quantity</th>
 						        	<th>Total</th>
 						      	</tr>
@@ -112,17 +111,12 @@
 								  {% if user.is_authenticated %}
 
 								  {% for val in orders %}
-								  <h3>{{ item.user }}</h3>
+								  <h3>{{ val.user }}</h3>
 								  	<td class="product-remove"><a href="#">hello<span class="ion-ios-close"></span></a></td>
-						        
-						        	<td class="image-prod"><div class="img" style="background-image:url('/static/images/product-3.jpg');"></div></td>
-						        
-						        	<td class="product-name">
-						        	<h3>{{ item.user }}</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
+								    <td class="product-name">
+						        	<h3>{{ val.items }}</h3>
 						        	</td>
-						        
-						        	<td class="price">${{val.items}}</td>
+								    <td class="price">{{val.ordered_date}}</td>
 
 						        <td class="quantity">
 						        	<div class="input-group mb-3">
@@ -134,26 +128,7 @@
 						      </tr><!-- END TR-->
 							{% endfor %}
 							  {% endif %}
-						      <tr class="text-center">
-						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 
-						        <td class="image-prod"><div class="img" style="background-image:url('/static/images/product-4.jpg');"></div></td>
-
-						        <td class="product-name">
-						        	<h3>Bell Pepper</h3>
-						        	<p>Far far away, behind the word mountains, far from the countries</p>
-						        </td>
-
-						        <td class="price">$15.70</td>
-
-						        <td class="quantity">
-						        	<div class="input-group mb-3">
-					             	<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-					          	</div>
-					          </td>
-
-						        <td class="total">$15.70</td>
-						      </tr><!-- END TR-->
 						    </tbody>
 						  </table>
 					  </div>
