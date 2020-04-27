@@ -1,8 +1,12 @@
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Items, OrderItem, Order
 from django.utils import timezone
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
+from .forms import CheckoutForm
 
 
 # Create your views here.
@@ -14,7 +18,8 @@ class ProductSingleView(DetailView):
     model= Items
     template_name = "productsingle.html"
 
-
+def checkout(request):
+    return render(request, 'checkout.html')
 
 def cart(request):
     print("Hello World")
@@ -26,10 +31,11 @@ def cart(request):
     var= Order.objects.all().filter(user=request.user)
     print(type(var))
     for i in var:
-        print(i.items.all())
-        for j in i.items.all():
-            print (j)
-    return render(request, 'cart.html')
+        context = {'orders': i.items.all()}
+        #print(i.items.all())
+        #for j in i.items.all():
+         #   print (j)
+    return render(request, 'cart.html', context)
 
 
 
@@ -44,14 +50,12 @@ def add_to_cart(request,slug):
     if order_qs.exists():
         order = order_qs[0]
         if order.items.filter(item__slug=item.slug).exists():
-            #ordered_date = timezone.now()
             order_item.quantity += 1
             order_item.save()
             messages.info(request, "This item quantity was updated.")
         else:
             messages.info(request, "This item was added to your cart")
             order.items.add(order_item)
-            #ordered_date = timezone.now()
 
     else:
         ordered_date = timezone.now()
@@ -59,7 +63,7 @@ def add_to_cart(request,slug):
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart")
 
-    return redirect("vegefoods:productsingle", slug=slug)
+    return redirect("vegefoods:ordersummary")
 
 def remove_from_cart(request, slug):
     item = get_object_or_404(Items, slug=slug)
@@ -92,6 +96,70 @@ def remove_from_cart(request, slug):
         return redirect("vegefoods:productsingle", slug=slug)
 
 
+def indexV(request):
+    return redirect('/')
 
+def indexVsp(request,slug):
+    return redirect('/')
 
+def cartsp(request,slug):
+    var= Order.objects.all().filter(user=request.user)
+    print(type(var))
+    for i in var:
+        context = {'orders': i.items.all()}
+    return render(request, 'cart.html', context)
 
+class OrderSummaryView( LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            context = {
+                'object': order
+            }
+            return render(self.request, 'ordersummary.html', context)
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an active order!")
+            return redirect('/')
+
+def remove_single_item_from_cart(request, slug):
+    item = get_object_or_404(Items, slug=slug)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        #check if the order item is in the order
+        if order.items.filter(item__slug=item.slug).exists():
+            order_item = OrderItem.objects.filter(
+                item=item,
+                user=request.user,
+                ordered=False
+            )[0]
+            if order_item.quantity > 1:
+                order_item.quantity -= 1
+                order_item.save()
+                #messages.info(request, "This item quantity was updated.")
+            else:
+                order_item.delete()
+                #messages.info(request, "This item was removed from your cart.")
+
+            return redirect("vegefoods:ordersummary")
+        else:
+            # add a msg saying the order does not contain the item
+            messages.info(request, "This item was not present in your cart.")
+            return redirect("vegefoods:ordersumamry")
+    else:
+        # add a msg saying that the user does not have a order
+        messages.info(request, "You do not have an order yet!!!")
+        return redirect("vegefoods:ordersummary")
+
+class CheckoutView(View):
+    def get(self, *args, **kwargs):
+        form = CheckoutForm()
+        context = {
+            'form': form
+        }
+        return render(self.request, "checkout.html", context)
+    def post(self, *args, **kwargs):
+        form = CheckoutForm(self.request.POST or None)
+        if form.is_valid():
+            print("The form is valid")
+            return redirect('vegefoods:checkout')

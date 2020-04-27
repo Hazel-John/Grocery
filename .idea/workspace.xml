@@ -19,7 +19,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Pais" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
@@ -73,10 +73,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="401" y="144" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.680@0.0.1280.680" timestamp="1587452108377" />
-    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1587032173363">
+    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1587836850899">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587032173363" />
+    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1587836850899" />
     <state width="1259" height="163" key="GridCell.Tab.0.bottom" timestamp="1587044099953">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -97,9 +97,9 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.680@0.0.1280.680" timestamp="1587554920953" />
-    <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1587014636638">
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog" timestamp="1587962650608">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1587014636638" />
+    <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1587962650608" />
   </component>
 </project>
