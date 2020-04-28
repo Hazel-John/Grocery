@@ -3,10 +3,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Items, OrderItem, Order
+from .models import Items, OrderItem, Order, BillingInfo
 from django.utils import timezone
+from django.contrib.auth.models import User, auth
 from django.views.generic import ListView, DetailView, View
-from .forms import CheckoutForm
+#from .forms import BillingInfoForm
+#from .forms import CheckoutForm
 
 
 # Create your views here.
@@ -151,15 +153,36 @@ def remove_single_item_from_cart(request, slug):
         messages.info(request, "You do not have an order yet!!!")
         return redirect("vegefoods:ordersummary")
 
-class CheckoutView(View):
-    def get(self, *args, **kwargs):
-        form = CheckoutForm()
-        context = {
-            'form': form
-        }
-        return render(self.request, "checkout.html", context)
-    def post(self, *args, **kwargs):
-        form = CheckoutForm(self.request.POST or None)
-        if form.is_valid():
-            print("The form is valid")
-            return redirect('vegefoods:checkout')
+#class CheckoutView(View):
+    #def get(self, *args, **kwargs):
+     #   form = CheckoutForm()
+      #  context = {
+       #     'form': form
+        #}
+        #return render(self.request, "checkout.html", context)
+    #def post(self, *args, **kwargs):
+     #   form = CheckoutForm(self.request.POST or None)
+      #  if form.is_valid():
+      #      print("The form is valid")
+       #     return redirect('vegefoods:checkout')
+
+def checkout(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        state = request.POST['state']
+        street_address = request.POST["street_address"]
+        apartment_address = request.POST["apartment_address"]
+        city = request.POST["city"]
+        zip = request.POST["zip"]
+        phone = request.POST["phone"]
+        user_info = BillingInfo.objects.create(user=request.user)
+        info_obj = BillingInfo(name=name, state=state, street_address=street_address,
+                                         apartment_address=apartment_address, city=city, zip=zip,
+                                         phone=phone)
+        info_obj.save(user_info)
+    return render(request, 'checkout.html')
+
+
+
+
+

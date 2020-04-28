@@ -69,3 +69,16 @@ class Order(models.Model):
         for order_item in self.items.all():
             total += order_item.get_final_price()
         return total
+
+class BillingInfo(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    street_address = models.CharField(max_length=300)
+    apartment_address = models.CharField(max_length=500)
+    city = models.CharField(max_length=100)
+    zip = models.CharField(max_length=100)
+    phone = models.CharField(max_length=10)
+    #payment_option = models.BooleanField(widget=models.RadioSelect())
+    def __str__(self):
+        return self.user.username
