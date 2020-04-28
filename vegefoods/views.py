@@ -7,10 +7,6 @@ from .models import Items, OrderItem, Order, BillingInfo
 from django.utils import timezone
 from django.contrib.auth.models import User, auth
 from django.views.generic import ListView, DetailView, View
-#from .forms import BillingInfoForm
-#from .forms import CheckoutForm
-
-
 # Create your views here.
 class IndexVView(ListView):
     model= Items
@@ -22,6 +18,9 @@ class ProductSingleView(DetailView):
 
 def checkout(request):
     return render(request, 'checkout.html')
+
+def about(request):
+    return render(request, 'about.html')
 
 def cart(request):
     print("Hello World")
@@ -64,7 +63,6 @@ def add_to_cart(request,slug):
         order = Order.objects.create(user=request.user, ordered_date=ordered_date)
         order.items.add(order_item)
         messages.info(request, "This item was added to your cart")
-
     return redirect("vegefoods:ordersummary")
 
 def remove_from_cart(request, slug):
@@ -89,11 +87,9 @@ def remove_from_cart(request, slug):
                 messages.info(request, "This item was removed from your cart.")
             return redirect("vegefoods:productsingle", slug=slug)
         else:
-            # add a msg saying the order does not contain the item
             messages.info(request, "This item was not present in your cart.")
             return redirect("vegefoods:productsingle", slug=slug)
     else:
-        # add a msg saying that the user does not have a order
         messages.info(request, "You do not have an order yet!!!")
         return redirect("vegefoods:productsingle", slug=slug)
 
@@ -103,13 +99,6 @@ def indexV(request):
 
 def indexVsp(request,slug):
     return redirect('/')
-
-def cartsp(request,slug):
-    var= Order.objects.all().filter(user=request.user)
-    print(type(var))
-    for i in var:
-        context = {'orders': i.items.all()}
-    return render(request, 'cart.html', context)
 
 class OrderSummaryView( LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
@@ -141,16 +130,11 @@ def remove_single_item_from_cart(request, slug):
                 #messages.info(request, "This item quantity was updated.")
             else:
                 order_item.delete()
-                #messages.info(request, "This item was removed from your cart.")
 
             return redirect("vegefoods:ordersummary")
         else:
-            # add a msg saying the order does not contain the item
-            messages.info(request, "This item was not present in your cart.")
             return redirect("vegefoods:ordersumamry")
     else:
-        # add a msg saying that the user does not have a order
-        messages.info(request, "You do not have an order yet!!!")
         return redirect("vegefoods:ordersummary")
 
 #class CheckoutView(View):
@@ -175,14 +159,18 @@ def checkout(request):
         city = request.POST["city"]
         zip = request.POST["zip"]
         phone = request.POST["phone"]
-        user_info = BillingInfo.objects.create(user=request.user)
-        info_obj = BillingInfo(name=name, state=state, street_address=street_address,
-                                         apartment_address=apartment_address, city=city, zip=zip,
-                                         phone=phone)
-        info_obj.save(user_info)
+        #user_info = BillingInfo.objects.create(user=request.user)
+        info_obj = BillingInfo(user=request.user, name=name, state=state, street_address=street_address,
+                               apartment_address=apartment_address, city=city, zip=zip,
+                               phone=phone)
+        info_obj.save()
     return render(request, 'checkout.html')
 
 
 
-
-
+def cartsp(request,slug):
+    var= Order.objects.all().filter(user=request.user)
+    print(type(var))
+    for i in var:
+        context = {'orders': i.items.all()}
+    return render(request, 'cart.html', context)

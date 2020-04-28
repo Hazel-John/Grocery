@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LOGIN</title>
     <link href="{% static 'css/login.css' %}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -26,14 +26,17 @@
 
     <!-- Icon -->
     <div class="fadeIn first">
-      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+        <i class="fa fa-user" aria-hidden="true"></i>
+
     </div>
 
     <!-- Login Form -->
     <form action="login" method="POST">
         {% csrf_token %}
         <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
-        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password"><br>
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password"
+               style="width:85%;background-color: #f6f6f6; text-align: center;border: 2px solid #f6f6f6;text-decoration: none;
+                display: inline-block;font-size: 16px; padding: 15px 32px; margin: 5px;"><br>
         <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
   </div>

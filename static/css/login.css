@@ -44,9 +44,9 @@ h2 {
 #formContent {
   -webkit-border-radius: 10px 10px 10px 10px;
   border-radius: 10px 10px 10px 10px;
-  background: #fff;
+  background: #ccc;
   padding: 30px;
-  width: 90%;
+  width: 10%;
   max-width: 450px;
   position: relative;
   padding: 0px;

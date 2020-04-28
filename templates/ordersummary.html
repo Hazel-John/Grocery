@@ -62,14 +62,25 @@
 	        <ul class="navbar-nav ml-auto">
 				<li class="nav-item"><b>Hello, {{user.first_name}} </b></li>
 				<li class="nav-item "><a href="indexV" class="nav-link">Home</a></li>
-				<li class="nav-item cta cta-colored active"><a href="cart" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+				<li class="nav-item cta cta-colored active"><a href="ordersummary" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 	            <li class="nav-item "><a href="checkout" class="nav-link">Checkout</a></li>
 			</ul>
 	      </div>
 	    </div>
 	  </nav>
     <!-- END nav -->
-
+		<div class="mt-5 pt-4">
+		{% if messages %}
+				{% for message in messages %}
+			    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+					{{message}}
+					<button type="button" class="close" data-dismiss="alert">
+							<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				{% endfor %}
+			{% endif %}
+		</div>
     <div class="hero-wrap hero-bread" style="background-image: url('/static/images/bg_1.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
@@ -152,7 +163,7 @@
       <div class="container">
       	<div class="row">
       		<div class="mouse">
-						<a href="#" class="mouse-icon">
+						<a href="ordersummary" class="mouse-icon">
 							<div class="mouse-wheel"><span class="ion-ios-arrow-up"></span></div>
 						</a>
 					</div>
@@ -160,13 +171,8 @@
         <div class="row mb-5">
           <div class="col-md">
             <div class="ftco-footer-widget mb-4">
-              <h2 class="ftco-heading-2">Vegefoods</h2>
+              <h1 class="ftco-heading-2">Vegefoods</h1>
               <p>Your one-stop smart shop resource.</p>
-              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
-                <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-              </ul>
             </div>
           </div>
           <div class="col-md">
@@ -206,46 +212,9 @@
   <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
   <script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
   <script src="{% static 'js/scrollax.min.js' %}"></script>
-  <script src="{% static 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false' %}"></script>
   <script src="{% static 'js/google-map.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
 
-  <script>
-		$(document).ready(function(){
-
-		var quantity=0;
-		   $('.quantity-right-plus').click(function(e){
-
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-
-		        // If is not undefined
-
-		            $('#quantity').val(quantity + 1);
-
-
-		            // Increment
-
-		    });
-
-		     $('.quantity-left-minus').click(function(e){
-		        // Stop acting like a button
-		        e.preventDefault();
-		        // Get the field name
-		        var quantity = parseInt($('#quantity').val());
-
-		        // If is not undefined
-
-		            // Increment
-		            if(quantity>0){
-		            $('#quantity').val(quantity - 1);
-		            }
-		    });
-
-		});
-	</script>
 
   </body>
 </html>

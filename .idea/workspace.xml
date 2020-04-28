@@ -101,5 +101,20 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="337" y="165" key="com.intellij.ide.util.TipDialog/0.0.1280.680@0.0.1280.680" timestamp="1587962650608" />
+    <state x="0" y="0" width="959" height="535" key="dock-window-1" timestamp="1588060263968">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="0" y="0" width="959" height="535" key="dock-window-1/0.0.1280.680@0.0.1280.680" timestamp="1588060263968" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/vegefoods/views.py</url>
+          <line>166</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -8,7 +8,6 @@ from .views import  (
     add_to_cart,
     remove_from_cart,
     remove_single_item_from_cart,
-    #CheckoutView,
 )
 
 app_name = 'vegefoods'
@@ -22,9 +21,10 @@ urlpatterns = [
     path('ordersummary/', OrderSummaryView.as_view() , name="ordersummary"),
     path('ordersummary/indexV', views.indexV, name="indexV"),
     path('ordersummary/checkout', views.checkout, name="checkout"),
-    #path('cart', views.cart, name="cart"),
+    path('ordersummary/ordersummary', OrderSummaryView.as_view() , name="ordersummary"),
     path('indexV', views.indexV, name="indexV"),
     path('checkout/', views.checkout, name="checkout"),
     path('product-single/<slug>/indexV', views.indexVsp, name="indexV"),
     path('product-single/<slug>/ordersummary', OrderSummaryView.as_view() , name="ordersummary"),
+    #path('product-single/<slug>/checkout', views.checkout, name="ordersummary"),
 ]
