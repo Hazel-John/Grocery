@@ -160,6 +160,7 @@ def checkout(request):
         zip = request.POST["zip"]
         phone = request.POST["phone"]
         #user_info = BillingInfo.objects.create(user=request.user)
+
         info_obj = BillingInfo(user=request.user, name=name, state=state, street_address=street_address,
                                apartment_address=apartment_address, city=city, zip=zip,
                                phone=phone)
